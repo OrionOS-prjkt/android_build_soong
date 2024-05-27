@@ -145,12 +145,17 @@ func dumpMakeVars(ctx Context, config Config, goals, vars []string, write_soong_
 
 // Variables to print out in the top banner
 var BannerVars = []string{
-	"PLATFORM_VERSION_CODENAME",
+	"ORION_BUILD_INFO",
+	"ORION_VERSION",
 	"PLATFORM_VERSION",
-	"CR_VERSION",
+	"ORION_BUILD_TYPE",
+	"ORION_BUILD_VARIANT",
+	"ORION_MAINTAINER",
+	"TARGET_DAVICE",
+	"ORION_GAPPS",
+	"PLATFORM_VERSION_CODENAME",
 	"PRODUCT_INCLUDE_TAGS",
 	"PRODUCT_SOURCE_ROOT_DIRS",
-	"TARGET_DEVICE",
 	"TARGET_BUILD_VARIANT",
 	"TARGET_BUILD_APPS",
 	"TARGET_BUILD_UNBUNDLED",
@@ -169,7 +174,6 @@ var BannerVars = []string{
 	"PRODUCT_IS_ATV",
 	"PRODUCT_IS_AUTOMOTIVE",
 	"WITH_SU",
-	"WITH_GMS",
 	"GMS_MAKEFILE",
 	"MAINLINE_MODULES_MAKEFILE",
 	"PRODUCT_SOONG_NAMESPACES",
@@ -178,13 +182,22 @@ var BannerVars = []string{
 func Banner(make_vars map[string]string) string {
 	b := &bytes.Buffer{}
 
-	fmt.Fprintln(b, "============================================")
+	fmt.Fprintln(b, "						      ")
+	fmt.Fprintln(b, "  ██████╗ ██████╗ ██╗ ██████╗ ███╗   ██╗ ██████╗ ███████╗ ")
+	fmt.Fprintln(b, " ██╔═══██╗██╔══██╗██║██╔═══██╗████╗  ██║██╔═══██╗██╔════╝ ")
+	fmt.Fprintln(b, " ██║   ██║██████╔╝██║██║   ██║██╔██╗ ██║██║   ██║███████╗ ")
+	fmt.Fprintln(b, " ██║   ██║██╔══██╗██║██║   ██║██║╚██╗██║██║   ██║╚════██║ ")
+	fmt.Fprintln(b, " ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║╚██████╔╝███████║ ")
+	fmt.Fprintln(b, "  ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝ ")
+
+
+        fmt.Fprintln(b, "================================================")
 	for _, name := range BannerVars {
 		if make_vars[name] != "" {
 			fmt.Fprintf(b, "%s=%s\n", name, make_vars[name])
 		}
 	}
-	fmt.Fprint(b, "============================================")
+	fmt.Fprint(b, "==================================================")
 
 	return b.String()
 }
